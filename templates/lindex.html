@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+<script type="text/javascript">
+window.onload = function() {
+
+var options = {
+	exportEnabled: true,
+	animationEnabled: true,
+	title:{
+		text: "Accounting"
+	},
+	legend:{
+		horizontalAlign: "right",
+		verticalAlign: "center"
+	},
+	data: [{
+		type: "pie",
+		showInLegend: true,
+		toolTipContent: "<b>{name}</b>: leads: {y} (#percent%)",
+		indexLabel: "{name}",
+		legendText: "{name} (percent)",
+		// indexLabelPlacement: "inside",
+		dataPoints: [
+			{% for client in clients %}
+			{ y: "({{ client ['leads'] }}", name: "{{ client ['full_name'] }}" },
+			{% endfor %}
+			// { y: 22, name: "Food" },
+			// { y: 4, name: "Fun" },
+			// { y: 32, name: "Clothes" },
+			// { y: 10, name: "Others"},
+			// { y: 34, name: "Utilities" }
+		]
+	}]
+};
+$("#chartContainer").CanvasJSChart(options);
+
+}
+</script>
+</head>
+<body>
+
+		<h2>These are all the Clients</h2>
+		<table class="table">
+			<tr>
+				<th>Name</th>
+
+				<th>leads</th>
+			</tr>
+			{% for client in clients %}
+			<tr>
+				<td>{{client['full_name']}}</td>
+				<td>{{client['leads']}}</td>
+			</tr>
+			{% endfor %}
+		</table>
+<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+<script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>  
+<script type="text/javascript" src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+</body>
+</html>
+
+['Diana Sue Manlulu',      2],
+['Tom Owen',  7],
+['John Supsupin', 4],
+['Toni Rose Panganiban',    7],
+['Masaki Fujimoto',    7],
+['Maria Gonzalez',    5],
+['Maria Gonzalez',    5],
+['Maria Gonzalez',    5],
+['Maria Gonzalez',    5],
+['Maria Gonzalez',    5],
