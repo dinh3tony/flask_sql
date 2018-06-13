@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+</head>
+
+<style>
+    .congrats {
+        color: green;
+    }
+</style>
+<body>
+    {% with messages = get_flashed_messages(category_filter=("success")) %}
+        {% if messages %}
+            {% for msg in messages %}
+                <span class="congrats"> {{msg}}</span>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <h1> Welcome, you've been logged in, {{ session['fname'] }}.</h1>
+    <form class='form-horizontal' action='/clear' >
+        <input class="btn btn-default" type="submit" value="Logout">
+    </form>
+    
+    
+</body>
+</html>
